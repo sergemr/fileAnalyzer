@@ -11,10 +11,13 @@ textract = boto3.client('textract')
 
 labels = [{"Query": "What is the total", "Text": "Total"},
           {"Query": "What is the date", "Text": "Date"},
+          {"Query": "What is the address or direccion", "Text": "Address"},
           {"Query": "What is the name", "Text": "Nombre"}]
+labelsr = [
+    {"Query": "Cual es la direccion", "Text": "Address"}]
 options = []
 for label in labels:
-    options.append({"Text": label["Text"], "Alias": label["Text"]+"Alias"})
+    options.append({"Text": label["Query"], "Alias": label["Text"]+"Alias"})
 
 print(options)
 document_name = '/Users/sergio/Documents/School/fileAnalyzer/backend/AWS Functions/factura.png'
@@ -30,7 +33,7 @@ total_value = 0
 total_index = 0
 
 
-# print(response['Blocks'])
+print(response['Blocks'])
 for item in response['Blocks']:
     try:
         # print(item)
