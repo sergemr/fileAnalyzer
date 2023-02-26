@@ -8,13 +8,15 @@ textract = boto3.client('textract')
 # Load the image file into memory
 # with open('/Users/sergio/Documents/School/fileAnalyzer/backend/AWS Functions/factura.png', 'rb') as file:
 #    image_data = file.read()
-
+my_id = "1-1124-0589"
 labels = [{"Query": "What is the total", "Text": "Total"},
           {"Query": "What is the date", "Text": "Date"},
+          {"Query": "Whats is the cedula juridica or NIF", "Text": "NIF"},
+          {"Query": "How much is on taxes or tributos or tributo", "Text": "Taxes"},
           {"Query": "What is the address or direccion", "Text": "Address"},
           {"Query": "What is the name", "Text": "Nombre"}]
 labelsr = [
-    {"Query": "Cual es la direccion", "Text": "Address"}]
+    {"Query": "Whats is the cedula juridica or NIF", "Text": "Address"}]
 options = []
 for label in labels:
     options.append({"Text": label["Query"], "Alias": label["Text"]+"Alias"})
@@ -31,7 +33,7 @@ field_name = 'TOTAL'
 # Search for the field you want to extract
 total_value = 0
 total_index = 0
-
+return_str = "Entrante"
 
 print(response['Blocks'])
 for item in response['Blocks']:
@@ -46,7 +48,8 @@ for item in response['Blocks']:
             for sub_item in item:
                 if sub_item == 'Text':
                     total_value = item.get('Text')
-
+                    if item.get('Text') == my_id:
+                        return_str = "Saliente"
                     print(
                         f"El {labels[total_index]['Text']} de esta factura es : {item.get('Text')}")
 
@@ -59,4 +62,5 @@ for item in response['Blocks']:
 
 
 # Print the value of the field
-print("fin")
+
+print(return_str)
