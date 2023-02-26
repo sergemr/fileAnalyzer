@@ -23,13 +23,22 @@ def extract_text(path):
     text = text.lower()
 
     # Remove punctuation
-    text = re.sub(r'[^\w\s]', '', text)
-    match = re.search(r'total\s*\$(\d+\.\d+)', text)
-    if match:
-        total_amount = float(match.group(1))
-    else:
-        total_amount = None
-
+    # text = re.sub(r'[^\w\s]', '', text)
+    # match = re.search(r'\b\d+(\.\d+)?(?=\s*total)', text)
+    # pattern = re.compile('¢\s*([\d,]+\.\d+).*?\btotal\b')
+    my_string = '¢ 21,875.00total por pagarhistorial '
+    pattern2 = re.compile('¢.*+')
+    match2 = re.match(pattern2, my_string)
+    pattern = re.compile('¢[a-z]+')
+    matches = re.match(pattern2, text)
+    print("total_amount")
+    # print(text)
+    print(match2)
+    print("total_amount matches")
+    # print(text)
+    print(matches)
+    # print(text)
+    # print(text)
     return text
 
 
@@ -47,7 +56,7 @@ X_train, X_val, y_train, y_val = train_test_split(
 vectorizer = CountVectorizer(lowercase=False)
 
 # Fit the vectorizer on the training data
-print(X_train)
+# print(X_train)
 vectorizer.fit(X_train)
 
 # Transform the text into features for both the training and validation data
@@ -66,6 +75,8 @@ print(f'Validation accuracy: {accuracy:.2f}')
 # Load the new invoice file and extract the text
 text = extract_text('/Users/sergio/Downloads/factura.pdf')
 # Convert the text into features using the CountVectorizer
+
+# print(text)
 Xpredict = vectorizer.transform([text])
 
 # Predict the label of the invoice using the trained model
