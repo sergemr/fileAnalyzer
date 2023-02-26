@@ -24,21 +24,14 @@ def extract_text(path):
 
     # Remove punctuation
     # text = re.sub(r'[^\w\s]', '', text)
-    # match = re.search(r'\b\d+(\.\d+)?(?=\s*total)', text)
-    # pattern = re.compile('¢\s*([\d,]+\.\d+).*?\btotal\b')
-    my_string = '¢ 21,875.00total por pagarhistorial '
-    pattern2 = re.compile('¢.*+')
-    match2 = re.match(pattern2, my_string)
-    pattern = re.compile('¢[a-z]+')
-    matches = re.match(pattern2, text)
-    print("total_amount")
-    # print(text)
-    print(match2)
-    print("total_amount matches")
-    # print(text)
-    print(matches)
-    # print(text)
-    # print(text)
+
+    pattern_from_colon_to_dollar = r"¢\s*([\d,]+\.\d+).*total"
+    match = re.search(pattern_from_colon_to_dollar, text.strip())
+    if match:
+        matched_value2 = match.group(1)
+        print("Matched value:", matched_value2)
+    else:
+        print("No match found.")
     return text
 
 
@@ -46,8 +39,8 @@ def extract_text(path):
 data = pd.read_csv(
     '/Users/sergio/Documents/School/fileAnalyzer/backend/Gen Functions/invoicesCSV.csv', sep=';')
 
-print(data.head(5))
-data.info()
+# print(data.head(5))
+# data.info()
 X_train, X_val, y_train, y_val = train_test_split(
     data['id'].astype(str), data['doc_type'], test_size=0.2, random_state=42)
 
