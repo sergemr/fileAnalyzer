@@ -234,12 +234,6 @@ def read_image_pdf(document_name):
     print(response['Text'])
 
 
-file_path = '/Users/sergio/Documents/School/fileAnalyzer/backend/AWS Functions/factura.pdf'
-file_path_nucleo = '/Users/sergio/Documents/School/fileAnalyzer/backend/AWS Functions/facturanucleo.pdf'
-file_path_no = '/Users/sergio/Documents/School/fileAnalyzer/backend/AWS Functions/Actividad3.pdf'
-file_image = "/Users/sergio/Documents/School/fileAnalyzer/backend/AWS Functions/factura.png"
-
-
 def extractPdfText(filePath=''):
     labels = [{"Query": "What is the total", "Text": "Total"},
               {"Query": "What is the date", "Text": "Date"},
@@ -283,13 +277,21 @@ def convert_process_pdf_to_image(file_path):
     print(images)
     images[0].save('new_folder\output.jpg', 'JPEG')
     read_image('new_folder\output.jpg')
+
+
+file_path = '/Users/sergio/Documents/School/fileAnalyzer/backend/AWS Functions/factura.pdf'
+file_path_nucleo = '/Users/sergio/Documents/School/fileAnalyzer/backend/AWS Functions/facturanucleo.pdf'
+file_path_no = '/Users/sergio/Documents/School/fileAnalyzer/backend/AWS Functions/Actividad3.pdf'
+file_image = "/Users/sergio/Documents/School/fileAnalyzer/backend/AWS Functions/factura.png"
+
+
 # extract_text(file_path)
 # extract_text(file_path_no)
-# load_images()
+load_images()
 # read_image(file_image)
 
 
-train_model()
+# train_model()
 # convert_process_pdf_to_image(file_path)
 # convert_process_pdf_to_image(file_path_nucleo)
 # read_image(file_image)
