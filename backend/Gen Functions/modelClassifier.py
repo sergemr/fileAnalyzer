@@ -1,81 +1,84 @@
+from sklearn.neighbors import KNeighborsClassifier
 import os
+import cv2
 import numpy as np
-from random import shuffle, choice
-from PIL import Image
-from keras.layers import Conv2D, MaxPooling2D
-from keras.layers import Dense, Dropout, Flatten
-from keras.models import Sequential
 
-IMAGE_SIZE = 256
-IMAGE_DIRECTORY = '/Users/sergio/Documents/School/fileAnalyzer/backend/Gen Functions/train_images'
+# Define the image size and the path to the training data folders
+IMAGE_SIZE = 50
+TRAINING_DATA_PATH = "/Users/sergio/Documents/School/fileAnalyzer/backend/Gen Functions/train_images"
 
+# Define the labels for noinvoices and invoices
+NOINVOICES_LABEL = 0
+INVOICES_LABEL = 1
 
-def label_img(name):
-    if name == 'incoming':
-        return np.array([1, 0])
-    elif name == 'outgoing':
-        return np.array([0, 1])
+# Function to preprocess the training images
 
 
-def load_data():
-    print("Loading images...")
-    train_data = []
-    directories = next(os.walk(IMAGE_DIRECTORY))[1]
+def preprocess_image(image_path):
+    print("image_path")
+    print(image_path)
+    img = cv2.imread(image_path, cv2.IMREAD_GRAYSCALE)
 
-    for dirname in directories:
-        print("Loading {0}".format(dirname))
-        file_names = next(os.walk(os.path.join(IMAGE_DIRECTORY, dirname)))[2]
-        for i in range(200):
-            image_name = choice(file_names)
-            image_path = os.path.join(IMAGE_DIRECTORY, dirname, image_name)
-            label = label_img(dirname)
-            if "DS_Store" not in image_path:
-                img = Image.open(image_path)
-                img = img.convert('L')
-                img = img.resize((IMAGE_SIZE, IMAGE_SIZE), Image.ANTIALIAS)
-                train_data.append([np.array(img), label])
-
-    return train_data
+    img = cv2.resize(img, (IMAGE_SIZE, IMAGE_SIZE))
+    return img.reshape(-1)
 
 
-def create_model():
-    model = Sequential()
-    model.add(Conv2D(32, kernel_size=(3, 3), activation='relu',
-              input_shape=(IMAGE_SIZE, IMAGE_SIZE, 1)))
-    model.add(MaxPooling2D(pool_size=(2, 2)))
+# Load the training data
+training_data = []
+for folder in os.listdir(TRAINING_DATA_PATH):
+    label = NOINVOICES_LABEL if folder == "noinvoices" else INVOICES_LABEL
+    folder_path = os.path.join(TRAINING_DATA_PATH, folder)
+    print("Loading images from", folder_path)
+    if '.DS_Store' not in folder_path:
+        for image_file in os.listdir(folder_path):
+            image_path = os.path.join(folder_path, image_file)
+            if '.DS_Store' not in image_path:
+                img = preprocess_image(image_path)
+                training_data.append([img, label])
 
-    model.add(Conv2D(64, kernel_size=(3, 3), activation='relu'))
-    model.add(MaxPooling2D(pool_size=(2, 2)))
+# Shuffle the training data
+np.random.shuffle(training_data)
 
-    model.add(Conv2D(128, kernel_size=(3, 3), activation='relu'))
-    model.add(MaxPooling2D(pool_size=(2, 2)))
+# Split the training data into inputs and labels
+X = np.array([data[0] for data in training_data])
+y = np.array([data[1] for data in training_data])
 
-    model.add(Conv2D(256, kernel_size=(3, 3), activation='relu'))
-    model.add(MaxPooling2D(pool_size=(2, 2)))
-
-    model.add(Conv2D(64, kernel_size=(3, 3), activation='relu'))
-    model.add(MaxPooling2D(pool_size=(2, 2)))
-
-    model.add(Dropout(0.2))
-    model.add(Flatten())
-    model.add(Dense(256, activation='relu'))
-    model.add(Dropout(0.2))
-    model.add(Dense(128, activation='relu'))
-    model.add(Dense(2, activation='softmax'))
-
-    return model
+# Define the classifier and train it on the training data
+classifier = KNeighborsClassifier(n_neighbors=5)
+print("Loading images from", classifier)
+classifier.fit(X, y)
+print("fitng images from", classifier)
+# Function to preprocess the test images
 
 
-training_data = load_data()
-training_images = np.array(
-    [i[0] for i in training_data]).reshape(-1, IMAGE_SIZE, IMAGE_SIZE, 1)
-training_labels = np.array([i[1] for i in training_data])
+def preprocess_test_image(image_path):
+    img = cv2.imread(image_path, cv2.IMREAD_GRAYSCALE)
+    img = cv2.resize(img, (IMAGE_SIZE, IMAGE_SIZE))
+    return img.reshape(-1)
 
-print('creating model')
-model = create_model()
-model.compile(loss='binary_crossentropy',
-              optimizer='adam', metrics=['accuracy'])
-print('training model')
-model.fit(training_images, training_labels,
-          batch_size=50, epochs=10, verbose=1)
-model.save("/modelNew.h5")
+
+# Use the classifier to predict whether a test image is a noinvoices or a invoices
+image_path = "/Users/sergio/Documents/School/fileAnalyzer/backend/AWS Functions/factura.png"
+
+test_image = preprocess_test_image(image_path)
+prediction = classifier.predict([test_image])[0]
+
+# Print the prediction result
+if prediction == NOINVOICES_LABEL:
+    print("The test image is a noinvoices.")
+else:
+    print("The test image is a invoices.")
+
+
+# Use the classifier to predict whether a test image is a noinvoices or a invoices
+
+test_image_path2 = "/Users/sergio/Documents/School/fileAnalyzer/backend/Gen Functions/train_images/noinvoices/P090903054.jpg"
+test_image2 = preprocess_test_image(test_image_path2)
+prediction2 = classifier.predict([test_image2])[0]
+
+print(prediction2)
+# Print the prediction result
+if prediction2 == NOINVOICES_LABEL:
+    print("The test image is a noinvoices.")
+else:
+    print("The test image is a invoices.")
