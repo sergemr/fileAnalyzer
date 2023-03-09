@@ -28,7 +28,7 @@ def label_img(name):
 def load_images(IMAGE_DIRECTORY):
 
     IMAGE_SIZE = 256
-    print("Loading images...")
+    # print("Loading images...")
     train_data = []
     directories = next(os.walk(IMAGE_DIRECTORY))[1]
 
@@ -77,7 +77,82 @@ def read_image_pdf(document_name):
               {"Query": "What is the address or direccion del emisor",
                   "Text": "Dirección del Emisor"},
               {"Query": "What is the country del emisor", "Text": "Pais del Emisor"},
-              {"Query": "What is the Customer ID", "Text": "Customer ID"},
+              {"Query": "What is the ID del cliente", "Text": "ID Cliente"},
+              {"Query": "What is the name", "Text": "Nombre del cliente"},
+              {"Query": "Whta is the email del cliente", "Text": "email cliente"},
+              {"Query": "What is the address or direccion del Cliente",
+                  "Text": "Dirección del cliente"},
+              {"Query": "What is the country del cliente",
+                  "Text": "Pais del cliente"},
+              {"Query": "What is the currency", "Text": "Moneda"},
+              {"Query": "What is the subtotal", "Text": "Subtotal del documento"},
+              {"Query": "What is the IVA Básico", "Text": "%IVA Basico"},
+              {"Query": "What is the IVA Minimo", "Text": "%IVA Mínimo"},
+              {"Query": "What is the otros impuestos", "Text": "%Otrosimp"},
+              {"Query": "What is the descuento", "Text": "%Desc"},
+              {"Query": "How much is on taxes or tributos or tributo or monto IVA básico",
+                  "Text": "Monto total IVA Basico"},
+              {"Query": "How much is on taxes or tributos or tributo or monto IVA minimo",
+                  "Text": "Monto total IVA minimo"},
+              {"Query": "How much is on taxes or tributos or tributo or monto otros cargos",
+                  "Text": "Monto total otros cargos"},
+              {"Query": "How much is on monto devuelto",
+                  "Text": "Monto IVA devuelto"},
+              {"Query": "How much is on monto descuento",
+                  "Text": "Monto total Descuento"},
+              {"Query": "How much is on total", "Text": "Monto total"},
+              {"Query": "What is the terminos de pago", "Text": "Términos de Pago"},
+              {"Query": "What is the Medio de Pago", "Text": "Medio de Pago"}]
+    labelsr = [
+        {"Query": "Whats is the cedula juridica or NIF", "Text": "Address"}]
+    options = []
+    for label in labels:
+        options.append(
+            {"Text": label["Query"], "Alias": label["Text"]+"Alias"})
+
+    print(options)
+    # document_name = '/Users/sergio/Documents/School/fileAnalyzer/backend/AWS Functions/factura.png'
+    # Open the file and read its contents
+    document = open(document_name, 'rb')
+    # Call Amazon Textract to extract the text from the file
+    response = textract.start_document_text_detection(
+        Document={'Bytes': document.read()})
+    field_name = 'TOTAL'
+
+    # Search for the field you want to extract
+    total_value = 0
+    total_index = 0
+    return_str = "Entrante"
+
+    # Print the extracted text
+    print(response['Text'])
+
+
+def read_image(document_name):
+
+    # Create a Textract client object
+    textract = boto3.client('textract')
+    print("Reading image")
+    # Load the image file into memory
+    # with open('/Users/sergio/Documents/School/fileAnalyzer/backend/AWS Functions/factura.png', 'rb') as file:
+    #    image_data = file.read()
+    my_id = "1-1124-0589"
+    labels = [{"Query": "What is the tipo documento", "Text": "Tipo documento"},
+              {"Query": "Whta is the número de documento",
+                  "Text": "Número de documento"},
+              {"Query": "Whta is the fecha de emisión", "Text": "Fecha emisión"},
+              {"Query": "Whta is the fecha de emisión", "Text": "Fecha emisión"},
+              {"Query": "Whta is the fecha de vencimiento",
+                  "Text": "Fecha vencimiento"},
+              {"Query": "Whats is the cedula juridica or NIF", "Text": "NIF"},
+              {"Query": "Whta is the nombre del emisor",
+                  "Text": "Nombre del Emisor"},
+              {"Query": "Whta is the teléfono del emisor",
+                  "Text": "Teléfono del emisor"},
+              {"Query": "Whta is the email del emisor", "Text": "email emisor"},
+              {"Query": "What is the address or direccion del emisor",
+                  "Text": "Dirección del Emisor"},
+              {"Query": "What is the country del emisor", "Text": "Pais del Emisor"},
               {"Query": "What is the ID del cliente", "Text": "ID Cliente"},
               {"Query": "What is the name", "Text": "Nombre del cliente"},
               {"Query": "Whta is the email del cliente", "Text": "email cliente"},
@@ -112,61 +187,12 @@ def read_image_pdf(document_name):
         options.append(
             {"Text": label["Query"], "Alias": label["Text"]+"Alias"})
 
-    print(options)
+    # print(options)
     # document_name = '/Users/sergio/Documents/School/fileAnalyzer/backend/AWS Functions/factura.png'
     # Open the file and read its contents
-    document = open(document_name, 'rb')
-    # Call Amazon Textract to extract the text from the file
-    response = textract.start_document_text_detection(
-        Document={'Bytes': document.read()})
-    field_name = 'TOTAL'
 
-    # Search for the field you want to extract
-    total_value = 0
-    total_index = 0
-    return_str = "Entrante"
-
-    # Print the extracted text
-    print(response['Text'])
-
-
-def read_image(document_name):
-
-    # Create a Textract client object
-    textract = boto3.client('textract')
-
-    # Load the image file into memory
-    # with open('/Users/sergio/Documents/School/fileAnalyzer/backend/AWS Functions/factura.png', 'rb') as file:
-    #    image_data = file.read()
-    my_id = "1-1124-0589"
-
-    my_id = re.sub('[^A-Za-z0-9]+', '', my_id)
-    labels = [{"Query": "What is the total", "Text": "Total"},
-              {"Query": "What is the document type", "Text": "Type"},
-              {"Query": "What is the date", "Text": "Date"},
-              {"Query": "Whats is the cedula juridica or NIF or ced", "Text": "NIF"},
-              {"Query": "Whats is the Customer ID", "Text": "CustomerID"},
-
-              {"Query": "What is the address or direccion", "Text": "Address"},
-              {"Query": "What is the name", "Text": "Nombre"},
-              {"Query": "How much is on taxes", "Text": "Taxes"},
-              {"Query": "Whats is the senders ID", "Text": "SenderID"},
-              {"Query": "What is the senders email address", "Text": "SenderEmail"},
-              {"Query": "What is the senders address",
-                  "Text": "SenderAddress"},
-              {"Query": "What is the currency", "Text": "Currency"},
-              {"Query": "What is the subtotal", "Text": "DocSubtotal"},
-              ]
-    labelsr = [
-        {"Query": "Whats is the cedula juridica or NIF", "Text": "Address"}]
-    options = []
-    for label in labels:
-        options.append(
-            {"Text": label["Query"], "Alias": label["Text"]+"Alias"})
-
-    print(options)
-    # document_name = '/Users/sergio/Documents/School/fileAnalyzer/backend/AWS Functions/factura.png'
-    # Open the file and read its contents
+    print("Reading image before analize")
+    print(document_name)
     with open(document_name, 'rb') as document:
         # Call Amazon Textract to extract the text from the file
         response = textract.analyze_document(Document={'Bytes': document.read()}, FeatureTypes=[
@@ -176,7 +202,7 @@ def read_image(document_name):
     # Search for the field you want to extract
     total_value = 0
     total_index = 0
-    return_str = "Saliente"
+    return_str = "Entrante"
 
     print(response['Blocks'])
     for item in response['Blocks']:
@@ -191,9 +217,12 @@ def read_image(document_name):
                 for sub_item in item:
                     if sub_item == 'Text':
                         total_value = item.get('Text')
-
+                        print('El id es')
+                        print(item.get('Text'))
+                        print('El id es')
+                        print(my_id)
                         if item.get('Text') == my_id:
-                            return_str = "Entrante"
+                            return_str = "Saliente"
                         print(
                             f"El {labels[total_index]['Text']} de esta factura es : {item.get('Text')}")
 
