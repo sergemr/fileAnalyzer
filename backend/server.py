@@ -1,6 +1,13 @@
-from flask import Flask, request
+
+
+from GenFunctions.analyzePDF import extracttext
 from flask_cors import CORS
+from flask import Flask, request
+
 import os
+import sys
+
+sys.path.insert(0, '/GenFunctions')
 
 app = Flask(__name__)
 CORS(app)
@@ -17,6 +24,8 @@ def get_members():
 def upload_file():
     file = request.files['file']
     file.save('uploads/' + file.filename)
+
+    extracttext('uploads/' + file.filename)
     return 'File uploaded successfully'
 
 

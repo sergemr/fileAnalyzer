@@ -1,8 +1,10 @@
 # from model import train_model
-# from imagesClass import read_image_pdf, read_image, load_images, label_img, convert_process_pdf_to_image
+from GenFunctions.imagesClass import read_image_pdf, read_image, load_images, label_img, convert_process_pdf_to_image
+import sys
+sys.path.insert(0, '../GenFunctions')
 # from pdfClass import extract_text
 # from modelClassifier import *
-from layoutParserClass import extract_text
+# from layoutParserClass import extract_text
 
 file_path = '/Users/sergio/Documents/School/fileAnalyzer/backend/AWS Functions/factura.pdf'
 file_path_nucleo = '/Users/sergio/Documents/School/fileAnalyzer/backend/AWS Functions/facturanucleo.pdf'
@@ -19,7 +21,9 @@ file_folder = "/Users/sergio/Documents/School/fileAnalyzer/backend/Gen Functions
 
 # read_image(file_image)
 
-extract_text(file_path)
+def extracttext(file_path2):
+    read_image(file_path2)
+
 # train_model()
 # convert_process_pdf_to_image(file_path)
 # convert_process_pdf_to_image(file_path_nucleo)

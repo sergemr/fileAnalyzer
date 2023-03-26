@@ -134,7 +134,8 @@ def read_image(document_name):
 
     # Create a Textract client object
     textract = boto3.client('textract')
-
+    print("Reading image")
+    print(document_name)
     # Load the image file into memory
     # with open('/Users/sergio/Documents/School/fileAnalyzer/backend/AWS Functions/factura.png', 'rb') as file:
     #    image_data = file.read()
