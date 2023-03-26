@@ -1,0 +1,32 @@
+:root { 
+  --azure-radiance: #028df9;
+  --black: #000000;
+  --blue-whale: #04274d;
+  --blue-whale-2: #04274d80;
+  --blue-whale-3: #04274d99;
+  --fiord: #494c68e6;
+  --fiord-2: #494c6880;
+  --granite-gray: #676767;
+  --hollywood-cerise: #f000b7;
+  --mine-shaft: #333333;
+  --quick-silver: #a4a4a4;
+  --quill-gray: #d3d3d3;
+  --san-juan: #294c72;
+  --star-dust: #a0a0a0;
+  --violet-blue: #384eb74c;
+  --white: #ffffff;
+  --white-2: #ffffffe6;
+  --woodsmoke: #0e0e0e;
+  --zircon: #f8f8ff;
+ 
+  --font-size-l: 20px;
+  --font-size-m: 18px;
+  --font-size-s: 16px;
+  --font-size-xl: 24px;
+  --font-size-xs: 14px;
+  --font-size-xxs: 12px;
+  --font-size-xxxs: 10px;
+ 
+  --font-family-jetbrains_mono: "JetBrains Mono", Helvetica;
+  --font-family-mulish: "Mulish", Helvetica;
+}

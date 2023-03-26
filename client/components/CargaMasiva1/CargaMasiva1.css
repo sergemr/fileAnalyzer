@@ -1,0 +1,12 @@
+.carga-masiva-1 {
+  align-items: flex-start;
+  background-color: var(--white);
+  border: 1px none;
+  display: flex;
+  flex-direction: column;
+  height: 1024px;
+  min-width: 1440px;
+  padding: 48px 84px 84px;
+  position: relative;
+}
+

@@ -1,0 +1,16 @@
+.carga-masiva-3-2 {
+  align-items: center;
+  border: 1px none;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-width: 653px;
+  position: relative;
+}
+
+#overlay-carga-masiva-3-2 {
+  align-items: center;
+  background-color: #ffffff00;
+  justify-content: center;
+}
+

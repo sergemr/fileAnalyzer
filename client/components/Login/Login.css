@@ -1,0 +1,12 @@
+.login {
+  align-items: flex-start;
+  background-color: var(--white);
+  border: 1px none;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-width: 1440px;
+  padding: 84px;
+  position: relative;
+}
+

@@ -1,3 +1,6 @@
 
 ml/envDev
 backend/envDev
+node_modules
+parcel_cache
+```

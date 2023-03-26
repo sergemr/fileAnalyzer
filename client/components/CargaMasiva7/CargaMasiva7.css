@@ -1,0 +1,10 @@
+.carga-masiva3 {
+  align-items: center;
+  border: 1px none;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-width: 653px;
+  position: relative;
+}
+
