@@ -6,10 +6,10 @@ import PyPDF2
 textract = boto3.client('textract')
 
 # Load the image file into memory
-# with open('/Users/sergio/Documents/School/fileAnalyzer/backend/AWS Functions/factura.png', 'rb') as file:
+# with open('/Users/sergio/Documents/School/fileAnalyzer/backend/AWSFunctions/factura.png', 'rb') as file:
 #    image_data = file.read()
 
-with open('/Users/sergio/Documents/School/fileAnalyzer/backend/AWS Functions/factura.pdf', 'rb') as f:
+with open('/Users/sergio/Documents/School/fileAnalyzer/backend/AWSFunctions/factura.pdf', 'rb') as f:
     pdf_reader = PyPDF2.PdfReader(f)
     pdf_contents = []
     for i in range(len(pdf_reader.pages)):

@@ -6,7 +6,7 @@ import PyPDF2
 textract = boto3.client('textract')
 
 # Load the image file into memory
-# with open('/Users/sergio/Documents/School/fileAnalyzer/backend/AWS Functions/factura.png', 'rb') as file:
+# with open('/Users/sergio/Documents/School/fileAnalyzer/backend/AWSFunctions/factura.png', 'rb') as file:
 #    image_data = file.read()
 my_id = "1-1124-0589"
 labels = [{"Query": "What is the total", "Text": "Total"},
@@ -22,7 +22,7 @@ for label in labels:
     options.append({"Text": label["Query"], "Alias": label["Text"]+"Alias"})
 
 print(options)
-document_name = '/Users/sergio/Documents/School/fileAnalyzer/backend/AWS Functions/factura.png'
+document_name = '/Users/sergio/Documents/School/fileAnalyzer/backend/AWSFunctions/factura.png'
 # Open the file and read its contents
 with open(document_name, 'rb') as document:
     # Call Amazon Textract to extract the text from the file

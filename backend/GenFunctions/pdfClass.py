@@ -16,7 +16,7 @@ import boto3
 from pdf2image import convert_from_path, convert_from_bytes
 import textract
 import pickle
-from imagesClass import read_image, read_image_pdf
+from GenFunctions.ImagesClass import read_image, read_image_pdf
 
 
 def extract_text(path):

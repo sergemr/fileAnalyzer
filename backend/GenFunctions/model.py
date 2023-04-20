@@ -22,7 +22,7 @@ import pandas as pd
 def train_model():
     # Load the data and split it into training and validation setsdffs
     data = pd.read_csv(
-        '/Users/sergio/Documents/School/fileAnalyzer/backend/Gen Functions/invoicesCSV.csv', sep=';')
+        '/Users/sergio/Documents/School/fileAnalyzer/backend/GenFunctions/invoicesCSV.csv', sep=';')
 
     # print(data.head(5))
     # data.info()

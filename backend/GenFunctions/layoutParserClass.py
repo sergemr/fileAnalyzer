@@ -12,9 +12,9 @@ else:
 
 
 def extract_text(path):
-    file_path2 = '/Users/sergio/Documents/School/fileAnalyzer/backend/AWS Functions/factura.pdf'
-    file_image1 = "/Users/sergio/Documents/School/fileAnalyzer/backend/AWS Functions/factura.png"
-    file_image = "/Users/sergio/Documents/School/fileAnalyzer/backend/AWS Functions/facturanucleo.png"
+    file_path2 = '/Users/sergio/Documents/School/fileAnalyzer/backend/AWSFunctions/factura.pdf'
+    file_image1 = "/Users/sergio/Documents/School/fileAnalyzer/backend/AWSFunctions/factura.png"
+    file_image = "/Users/sergio/Documents/School/fileAnalyzer/backend/AWSFunctions/facturanucleo.png"
     image = cv2.imread(file_image)
     # print(file_path)
 

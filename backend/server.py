@@ -1,5 +1,6 @@
 
 
+import json
 from GenFunctions.analyzePDF import extracttext
 from flask_cors import CORS
 from flask import Flask, request
@@ -22,11 +23,16 @@ def get_members():
 
 @app.route('/upload', methods=['POST'])
 def upload_file():
+    print(request)
     file = request.files['file']
     file.save('uploads/' + file.filename)
+    return_string = file.filename
+    return_string = extracttext('uploads/' + file.filename)
+    # jsonString = json.dumps(return_string, indent=len(return_string))
 
-    extracttext('uploads/' + file.filename)
-    return 'File uploaded successfully'
+    print('File uploaded successfully')
+    print(return_string)
+    return return_string
 
 
 if __name__ == "__main__":

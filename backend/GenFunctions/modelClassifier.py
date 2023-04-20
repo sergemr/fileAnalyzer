@@ -2,23 +2,26 @@ from sklearn.neighbors import KNeighborsClassifier
 import os
 import cv2
 import numpy as np
+import logging
+logging.basicConfig(filename="log.txt", level=logging.DEBUG)
 
 # Define the image size and the path to the training data folders
 IMAGE_SIZE = 50
-TRAINING_DATA_PATH = "/Users/sergio/Documents/School/fileAnalyzer/backend/Gen Functions/train_images"
+TRAINING_DATA_PATH = "/Users/sergio/Documents/School/fileAnalyzer/backend/GenFunctions/train_images/"
 
 # Define the labels for noinvoices and invoices
-NOINVOICES_LABEL = 0
-INVOICES_LABEL = 1
+NOINVOICES_LABEL = "noinvoices"
+INVOICES_LABEL = "invoices"
 
 # Function to preprocess the training images
 
 
 def preprocess_image(image_path):
-    print("image_path")
-    print(image_path)
-    img = cv2.imread(image_path, cv2.IMREAD_GRAYSCALE)
+   # print("image_path")
 
+  #  print(image_path)
+    img = cv2.imread(image_path, cv2.IMREAD_GRAYSCALE)
+    logging.debug((f'Loaded Img path: {image_path}'))
     img = cv2.resize(img, (IMAGE_SIZE, IMAGE_SIZE))
     return img.reshape(-1)
 
@@ -58,7 +61,7 @@ def preprocess_test_image(image_path):
 
 
 # Use the classifier to predict whether a test image is a noinvoices or a invoices
-image_path = "/Users/sergio/Documents/School/fileAnalyzer/backend/AWS Functions/factura.png"
+image_path = "/Users/sergio/Documents/School/fileAnalyzer/backend/AWSFunctions/factura.png"
 
 test_image = preprocess_test_image(image_path)
 prediction = classifier.predict([test_image])[0]
@@ -72,7 +75,7 @@ else:
 
 # Use the classifier to predict whether a test image is a noinvoices or a invoices
 
-test_image_path2 = "/Users/sergio/Documents/School/fileAnalyzer/backend/Gen Functions/train_images/noinvoices/P090903054.jpg"
+test_image_path2 = "/Users/sergio/Documents/School/fileAnalyzer/backend/GenFunctions/train_images/noinvoices/P090903054.jpg"
 test_image2 = preprocess_test_image(test_image_path2)
 prediction2 = classifier.predict([test_image2])[0]
 

@@ -6,7 +6,7 @@ import PyPDF2
 textract = boto3.client('textract')
 
 # Load the image file into memory
-with open('/Users/sergio/Documents/School/fileAnalyzer/backend/AWS Functions/factura.png', 'rb') as file:
+with open('/Users/sergio/Documents/School/fileAnalyzer/backend/AWSFunctions/factura.png', 'rb') as file:
     image_data = file.read()
 
 

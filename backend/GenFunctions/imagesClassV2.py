@@ -12,9 +12,7 @@ import numpy as np
 from PIL import Image
 from random import shuffle, choice
 import os
-import boto3
 from pdf2image import convert_from_path, convert_from_bytes
-import textract
 import pickle
 
 
@@ -58,7 +56,7 @@ def read_image_pdf(document_name):
     textract = boto3.client('textract')
 
     # Load the image file into memory
-    # with open('/Users/sergio/Documents/School/fileAnalyzer/backend/AWS Functions/factura.png', 'rb') as file:
+    # with open('/Users/sergio/Documents/School/fileAnalyzer/backend/AWSFunctions/factura.png', 'rb') as file:
     #    image_data = file.read()
     my_id = "1-1124-0589"
     labels = [{"Query": "What is the tipo documento", "Text": "Tipo documento"},
@@ -111,7 +109,7 @@ def read_image_pdf(document_name):
             {"Text": label["Query"], "Alias": label["Text"]+"Alias"})
 
     print(options)
-    # document_name = '/Users/sergio/Documents/School/fileAnalyzer/backend/AWS Functions/factura.png'
+    # document_name = '/Users/sergio/Documents/School/fileAnalyzer/backend/AWSFunctions/factura.png'
     # Open the file and read its contents
     document = open(document_name, 'rb')
     # Call Amazon Textract to extract the text from the file
@@ -134,7 +132,7 @@ def read_image(document_name):
     textract = boto3.client('textract')
     print("Reading image")
     # Load the image file into memory
-    # with open('/Users/sergio/Documents/School/fileAnalyzer/backend/AWS Functions/factura.png', 'rb') as file:
+    # with open('/Users/sergio/Documents/School/fileAnalyzer/backend/AWSFunctions/factura.png', 'rb') as file:
     #    image_data = file.read()
     my_id = "1-1124-0589"
     labels = [{"Query": "What is the tipo documento", "Text": "Tipo documento"},
@@ -188,7 +186,7 @@ def read_image(document_name):
             {"Text": label["Query"], "Alias": label["Text"]+"Alias"})
 
     # print(options)
-    # document_name = '/Users/sergio/Documents/School/fileAnalyzer/backend/AWS Functions/factura.png'
+    # document_name = '/Users/sergio/Documents/School/fileAnalyzer/backend/AWSFunctions/factura.png'
     # Open the file and read its contents
 
     print("Reading image before analize")

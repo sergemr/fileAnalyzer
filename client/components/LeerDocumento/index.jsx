@@ -28,6 +28,20 @@ function LeerDocumento(props) {
     logoProps,
   } = props;
 
+  const onSubmit = (e) => {
+    e.preventDefault();
+    const formData = new FormData();
+    formData.append("file", e.target.file.files[0]);
+    console.log(formData);
+    fetch("http://localhost:5001/upload", {
+      method: "POST",
+      body: formData,
+    })
+      //.then((res) => res.json())
+      .then((data) => console.log(data))
+      .catch((err) => console.log(err));
+
+  }
   return (
     <div className="leer-documento screen">
       <Header>
@@ -54,7 +68,7 @@ function LeerDocumento(props) {
         </Link>
       </Menu>
       <Container>
-      <form action="http://localhost:5001/upload" method="post" enctype="multipart/form-data">
+      <form onSubmit={onSubmit}  enctype="multipart/form-data">
         <FileUpload>
           {/*<Link to="/leer-documento-2">*/}
             <UploadFileArea>

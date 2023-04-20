@@ -47411,6 +47411,17 @@ var _styledMixins = require("../../styledMixins");
 var _leerDocumentoCss = require("./LeerDocumento.css");
 function LeerDocumento(props) {
     const { salir , cargaMasiva , consultarDocumentos , uploadIcon , spanText1 , spanText2 , spanText3 , formatosSoportadosDocTxtPdf , logoProps  } = props;
+    const onSubmit = (e)=>{
+        e.preventDefault();
+        const formData = new FormData();
+        formData.append("file", e.target.file.files[0]);
+        console.log(formData);
+        fetch("http://localhost:5001/upload", {
+            method: "POST",
+            body: formData
+        })//.then((res) => res.json())
+        .then((data)=>console.log(data)).catch((err)=>console.log(err));
+    };
     return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
         className: "leer-documento screen",
         children: [
@@ -47420,7 +47431,7 @@ function LeerDocumento(props) {
                         logo_Vector: logoProps.logo_Vector
                     }, void 0, false, {
                         fileName: "components/LeerDocumento/index.jsx",
-                        lineNumber: 34,
+                        lineNumber: 48,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouterDom.Link), {
@@ -47431,7 +47442,7 @@ function LeerDocumento(props) {
                                     children: salir
                                 }, void 0, false, {
                                     fileName: "components/LeerDocumento/index.jsx",
-                                    lineNumber: 37,
+                                    lineNumber: 51,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)(LogOut, {
@@ -47439,31 +47450,31 @@ function LeerDocumento(props) {
                                     alt: "log-out"
                                 }, void 0, false, {
                                     fileName: "components/LeerDocumento/index.jsx",
-                                    lineNumber: 38,
+                                    lineNumber: 52,
                                     columnNumber: 13
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "components/LeerDocumento/index.jsx",
-                            lineNumber: 36,
+                            lineNumber: 50,
                             columnNumber: 11
                         }, this)
                     }, void 0, false, {
                         fileName: "components/LeerDocumento/index.jsx",
-                        lineNumber: 35,
+                        lineNumber: 49,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "components/LeerDocumento/index.jsx",
-                lineNumber: 33,
+                lineNumber: 47,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)(Menu, {
                 children: [
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _menuOptionDefault.default), {}, void 0, false, {
                         fileName: "components/LeerDocumento/index.jsx",
-                        lineNumber: 43,
+                        lineNumber: 57,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouterDom.Link), {
@@ -47474,7 +47485,7 @@ function LeerDocumento(props) {
                                     children: cargaMasiva
                                 }, void 0, false, {
                                     fileName: "components/LeerDocumento/index.jsx",
-                                    lineNumber: 46,
+                                    lineNumber: 60,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)(Line1, {
@@ -47482,18 +47493,18 @@ function LeerDocumento(props) {
                                     alt: "Line 1"
                                 }, void 0, false, {
                                     fileName: "components/LeerDocumento/index.jsx",
-                                    lineNumber: 47,
+                                    lineNumber: 61,
                                     columnNumber: 13
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "components/LeerDocumento/index.jsx",
-                            lineNumber: 45,
+                            lineNumber: 59,
                             columnNumber: 11
                         }, this)
                     }, void 0, false, {
                         fileName: "components/LeerDocumento/index.jsx",
-                        lineNumber: 44,
+                        lineNumber: 58,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouterDom.Link), {
@@ -47503,29 +47514,28 @@ function LeerDocumento(props) {
                                 children: consultarDocumentos
                             }, void 0, false, {
                                 fileName: "components/LeerDocumento/index.jsx",
-                                lineNumber: 52,
+                                lineNumber: 66,
                                 columnNumber: 13
                             }, this)
                         }, void 0, false, {
                             fileName: "components/LeerDocumento/index.jsx",
-                            lineNumber: 51,
+                            lineNumber: 65,
                             columnNumber: 11
                         }, this)
                     }, void 0, false, {
                         fileName: "components/LeerDocumento/index.jsx",
-                        lineNumber: 50,
+                        lineNumber: 64,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "components/LeerDocumento/index.jsx",
-                lineNumber: 42,
+                lineNumber: 56,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)(Container, {
                 children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("form", {
-                    action: "http://localhost:5001/upload",
-                    method: "post",
+                    onSubmit: onSubmit,
                     enctype: "multipart/form-data",
                     children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)(FileUpload, {
                         children: [
@@ -47537,7 +47547,7 @@ function LeerDocumento(props) {
                                             alt: "Upload icon"
                                         }, void 0, false, {
                                             fileName: "components/LeerDocumento/index.jsx",
-                                            lineNumber: 62,
+                                            lineNumber: 76,
                                             columnNumber: 17
                                         }, this),
                                         /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)(ArrastrarSoltarA, {
@@ -47548,7 +47558,7 @@ function LeerDocumento(props) {
                                                         children: spanText1
                                                     }, void 0, false, {
                                                         fileName: "components/LeerDocumento/index.jsx",
-                                                        lineNumber: 65,
+                                                        lineNumber: 79,
                                                         columnNumber: 21
                                                     }, this),
                                                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("span", {
@@ -47556,48 +47566,48 @@ function LeerDocumento(props) {
                                                         children: spanText2
                                                     }, void 0, false, {
                                                         fileName: "components/LeerDocumento/index.jsx",
-                                                        lineNumber: 66,
+                                                        lineNumber: 80,
                                                         columnNumber: 21
                                                     }, this),
                                                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)(Span24, {
                                                         children: spanText3
                                                     }, void 0, false, {
                                                         fileName: "components/LeerDocumento/index.jsx",
-                                                        lineNumber: 67,
+                                                        lineNumber: 81,
                                                         columnNumber: 21
                                                     }, this)
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "components/LeerDocumento/index.jsx",
-                                                lineNumber: 64,
+                                                lineNumber: 78,
                                                 columnNumber: 19
                                             }, this)
                                         }, void 0, false, {
                                             fileName: "components/LeerDocumento/index.jsx",
-                                            lineNumber: 63,
+                                            lineNumber: 77,
                                             columnNumber: 17
                                         }, this),
                                         /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)(FormatosSoportadosDocTxtPdf, {
                                             children: formatosSoportadosDocTxtPdf
                                         }, void 0, false, {
                                             fileName: "components/LeerDocumento/index.jsx",
-                                            lineNumber: 70,
+                                            lineNumber: 84,
                                             columnNumber: 17
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "components/LeerDocumento/index.jsx",
-                                    lineNumber: 61,
+                                    lineNumber: 75,
                                     columnNumber: 15
                                 }, this)
                             }, void 0, false, {
                                 fileName: "components/LeerDocumento/index.jsx",
-                                lineNumber: 60,
+                                lineNumber: 74,
                                 columnNumber: 13
                             }, this),
                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _ctaDefault.default), {}, void 0, false, {
                                 fileName: "components/LeerDocumento/index.jsx",
-                                lineNumber: 74,
+                                lineNumber: 88,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("input", {
@@ -47606,7 +47616,7 @@ function LeerDocumento(props) {
                                 name: "file"
                             }, void 0, false, {
                                 fileName: "components/LeerDocumento/index.jsx",
-                                lineNumber: 75,
+                                lineNumber: 89,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("input", {
@@ -47614,34 +47624,34 @@ function LeerDocumento(props) {
                                 value: "Upload"
                             }, void 0, false, {
                                 fileName: "components/LeerDocumento/index.jsx",
-                                lineNumber: 76,
+                                lineNumber: 90,
                                 columnNumber: 11
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "components/LeerDocumento/index.jsx",
-                        lineNumber: 58,
+                        lineNumber: 72,
                         columnNumber: 9
                     }, this)
                 }, void 0, false, {
                     fileName: "components/LeerDocumento/index.jsx",
-                    lineNumber: 57,
+                    lineNumber: 71,
                     columnNumber: 7
                 }, this)
             }, void 0, false, {
                 fileName: "components/LeerDocumento/index.jsx",
-                lineNumber: 56,
+                lineNumber: 70,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _footerDefault.default), {}, void 0, false, {
                 fileName: "components/LeerDocumento/index.jsx",
-                lineNumber: 80,
+                lineNumber: 94,
                 columnNumber: 7
             }, this)
         ]
     }, void 0, true, {
         fileName: "components/LeerDocumento/index.jsx",
-        lineNumber: 32,
+        lineNumber: 46,
         columnNumber: 5
     }, this);
 }
