@@ -24,7 +24,7 @@ file_folder = "/Users/sergio/Documents/School/fileAnalyzer/backend/GenFunctions/
 # read_image(file_image)
 
 def extracttext(file_path2):
-    read_image(file_image)
+    read_image(file_path2)
     print(file_path2)
     print("sys.path")
     print(sys.path)

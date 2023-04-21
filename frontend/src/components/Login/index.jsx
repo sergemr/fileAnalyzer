@@ -74,7 +74,7 @@ function Login(props) {
               <Link to="/leer-documento-1">
                 <Rectangle4></Rectangle4>
               </Link>
-              <INGRESAR onClick={()=> location.href="/leer-documento-1"}>{ingresar}</INGRESAR>
+              <INGRESAR >{ingresar}</INGRESAR>
             </OverlapGroup2>
           </CtaLogin>
         </LogArea>

@@ -14,6 +14,7 @@ import {
   MulishNormalBlueWhale24px,
 } from "../../styledMixins";
 import "./LeerDocumento1.css";
+import Upload from "../Upload/Upload";
 
 function LeerDocumento1(props) {
   const {
@@ -71,6 +72,7 @@ function LeerDocumento1(props) {
             </UploadFileArea>
           </Link>
           <CTA />
+          <Upload></Upload>
         </FileUpload>
       </Container>
       <Footer />
