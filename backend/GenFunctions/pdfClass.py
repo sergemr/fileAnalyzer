@@ -21,6 +21,8 @@ from GenFunctions.ImagesClass import read_image, read_image_pdf
 
 def extract_text(path):
     pdf_file = open(path, 'rb')
+    print("pdf_file")
+    print(pdf_file)
     pdf_reader = PyPDF2.PdfReader(pdf_file)
 
     # Extract text from all pages in the PDF file
@@ -76,15 +78,12 @@ def extractPdfText(filePath=''):
 
     # if (text == ''):
 
-    print("options")
-    print(options)
     text2 = textract.process(
         filePath, moethod='tesseract', encoding='utf-8', FeatureTypes=[
             'QUERIES'], QueriesConfig={"Queries": options})
 
-    print(text)
-    print(text2)
-    return text
+    response = {"TextParsed": text, "TextParsedResponse": text2}
+    return response
 
 
 def convert_process_pdf_to_image(file_path):

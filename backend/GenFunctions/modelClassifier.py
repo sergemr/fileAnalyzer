@@ -1,4 +1,6 @@
 from sklearn.neighbors import KNeighborsClassifier
+import joblib
+
 import os
 import cv2
 import numpy as np
@@ -50,6 +52,8 @@ y = np.array([data[1] for data in training_data])
 classifier = KNeighborsClassifier(n_neighbors=5)
 print("Loading images from", classifier)
 classifier.fit(X, y)
+# Save the trained model
+joblib.dump(classifier, 'model.pkl')
 print("fitng images from", classifier)
 # Function to preprocess the test images
 
@@ -85,3 +89,18 @@ if prediction2 == NOINVOICES_LABEL:
     print("The test image is a noinvoices.")
 else:
     print("The test image is a invoices.")
+
+classifier = joblib.load('model.pkl')
+
+# Use the loaded classifier to predict the class of a test image
+test_image_path = "/Users/sergio/Documents/School/fileAnalyzer/backend/AWSFunctions/nofactura.png"
+test_image = preprocess_test_image(test_image_path)
+print(test_image)
+prediction3 = classifier.predict([test_image])[0]
+
+print(prediction3)
+# Print the prediction result
+if prediction3 == NOINVOICES_LABEL:
+    print("The test image is a noinvoices nofactura from Model.")
+else:
+    print("The test image is a invoices nofacturafrom Model.")

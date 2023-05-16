@@ -2,6 +2,8 @@
 
 import json
 from GenFunctions.analyzePDF import extracttext
+from GenFunctions.pdfClass import extract_text, extractPdfText
+
 from flask_cors import CORS
 from flask import Flask, request
 
@@ -15,9 +17,33 @@ CORS(app)
 members = [{"id": 1,        "name": "John Doe"},    {"id": 2,
                                                      "name": "Jane Doe"},    {"id": 3,        "name": "Bob Smith"}]
 
+app.config['UPLOAD_FOLDER'] = './uploads'
 
-@app.route("/members")
-def get_members():
+
+@app.route("/extracttext", methods=["POST"])
+def extract_text():
+    file = request.files['file']
+    if not file:
+        return {"error": "No file provided."}, 400
+    # print(file)
+
+    file_path = os.path.join(app.config['UPLOAD_FOLDER'], file.filename)
+    file.save(file_path)
+    text_response = extractPdfText(file_path)
+    for key, value in text_response.items():
+        if isinstance(value, bytes):
+            # Decode the byte string
+            text_response[key] = value.decode()
+
+    # Convert the dictionary to JSON
+    json_data = json.dumps(text_response)
+
+    # json_response = json.dumps(json_data)
+    # print(text_response)
+    return {"text": json.dumps(json_data)}
+
+
+def read_text():
     return {"members": members}
 
 
