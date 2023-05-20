@@ -22,11 +22,14 @@ def preprocess_image(image_path):
    # print("image_path")
 
   #  print(image_path)
+    print("Loading images from", image_path)
     img = cv2.imread(image_path, cv2.IMREAD_GRAYSCALE)
     logging.debug((f'Loaded Img path: {image_path}'))
     img = cv2.resize(img, (IMAGE_SIZE, IMAGE_SIZE))
     return img.reshape(-1)
 
+
+print("Loading images from")
 
 # Load the training data
 training_data = []

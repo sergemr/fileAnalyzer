@@ -585,4 +585,4 @@ def testandtrain():
     # return json.dumps(le.inverse_transform(predicted_payment_method).tolist())
 
 
-# testandtrain()
+testandtrain()
