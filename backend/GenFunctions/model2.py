@@ -580,7 +580,7 @@ def testandtrain():
     X_input_encoded = preprocessor.transform(X_input)
     y_pred = loaded_model.predict(X_input_encoded)
 
-    print("Predicted target value:", y_pred)
+    print("Predicted target value:1", y_pred)
 
     # return json.dumps(le.inverse_transform(predicted_payment_method).tolist())
 
